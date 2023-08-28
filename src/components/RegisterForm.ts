@@ -1,0 +1,1 @@
+export type RegisterForm={username:string, firstName: string, lastName:string, password:string, passwordConfirmation: string, email: string, agreeTermOfServices:boolean}
