@@ -3,7 +3,7 @@
   import { type LoginForm } from '@/components/LoginForm'
   import { login } from '@/services/user.service'
 
-  const form = reactive<LoginForm>({username:'', password:''})
+  const form = reactive<LoginForm>({username:'gokhan', password:'1'})
 
   const onSubmit=() => {
     login(form)
