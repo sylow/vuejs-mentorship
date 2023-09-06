@@ -1,1 +1,1 @@
-export type RegisterForm={username:string, firstName: string, lastName:string, password:string, passwordConfirmation: string, email: string, agreeTermOfServices:boolean}
+export type RegisterForm={username:string, first_name: string, last_name:string, password:string, password_confirmation: string, email: string}

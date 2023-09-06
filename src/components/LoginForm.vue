@@ -4,17 +4,36 @@
   import { login } from '@/services/user.service'
 
   const form = reactive<LoginForm>({username:'gokhan', password:'1'})
+  const result  = ref({})
 
   const onSubmit=() => {
-    login(form)
+    console.log(login(form))
+    const result = login(form)
     console.log('Clicked on submit')
   }
 </script>
 <template>
-  <h1>Login</h1>
+  {{  result }}
+  <h1 class="title is-1">Login</h1>
   <form @submit.prevent="onSubmit">
-    username: <input type="text" name="username" role="email" v-model="form.username">
-    Password: <input type="password" name="password" role="password" v-model="form.password">
-    <button type="submit">Login</button>
+    <div class="field">
+      <label class="label">Username</label>
+      <div class="control">
+        <input type="text" name="username" role="username" class="input" v-model="form.username">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input type="text" name="password" role="password" class="input" v-model="form.password">
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link">Login</button>
+      </div>
+    </div>
   </form>
 </template>
