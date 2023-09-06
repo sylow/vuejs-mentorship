@@ -5,12 +5,13 @@ import { registerAsyncAwait } from '@/services/user.service'
 import { Form, Field, ErrorMessage } from 'vee-validate';
 
 const form = reactive<RegisterForm>({ username: '', password: '', password_confirmation: '', first_name: '', last_name: '', email: '' })
-const initialFormErrors = reactive<any>({ // todo - Do NOT use ANY
+const initialFormErrors = reactive<Partial<RegisterForm>>({ // todo - Do NOT use ANY
   username: ''
 })
 const errorMessage = ref<String | null>(null)
-const agreeTermOfServices = ref(false)
 const loading = ref<boolean>(false)
+
+const agreeTermOfServices = ref(false)
 
 const onSubmit = async () => {
   if (loading.value) return
