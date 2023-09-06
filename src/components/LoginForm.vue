@@ -2,31 +2,34 @@
   import { ref, reactive } from 'vue'
   import { type LoginForm } from '@/components/LoginForm'
   import { login } from '@/services/user.service'
+  import { Form, Field, ErrorMessage } from 'vee-validate';
 
   const form = reactive<LoginForm>({username:'gokhan', password:'1'})
   const result  = ref({})
 
   const onSubmit=() => {
-    console.log(login(form))
     const result = login(form)
     console.log('Clicked on submit')
   }
+
 </script>
+
 <template>
   {{  result }}
   <h1 class="title is-1">Login</h1>
-  <form @submit.prevent="onSubmit">
+  <Form @submit="onSubmit">
     <div class="field">
       <label class="label">Username</label>
       <div class="control">
-        <input type="text" name="username" role="username" class="input" v-model="form.username">
+        <Field type="text" name="username" role="username" class="input" v-model="form.username" :rules="validateEmail"/>
+        <ErrorMessage name="username" />
       </div>
     </div>
 
     <div class="field">
       <label class="label">Password</label>
       <div class="control">
-        <input type="text" name="password" role="password" class="input" v-model="form.password">
+        <Field type="text" name="password" role="password" class="input" v-model="form.password" />
       </div>
     </div>
 
@@ -35,5 +38,5 @@
         <button class="button is-link">Login</button>
       </div>
     </div>
-  </form>
+  </Form>
 </template>

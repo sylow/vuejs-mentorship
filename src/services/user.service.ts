@@ -16,10 +16,12 @@ export const login=(form:LoginForm):{success: Boolean, data: any, error?: string
     .then((response) => {
       response.json().then((d) => {
         data = d
+        console.log(data)
       });
     })
     .catch((err) => {
       error = err
+      console.log(err)
     });
     if (error != '')
       return { success: false, data: {}, error}
