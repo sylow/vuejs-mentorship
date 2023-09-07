@@ -3,13 +3,16 @@
   import { type LoginForm } from '@/components/LoginForm'
   import { login } from '@/services/user.service'
   import { Form, Field, ErrorMessage } from 'vee-validate';
+  import { useAuthStore } from '@/stores/auth'
 
   const form = reactive<LoginForm>({username:'gokhan', password:'1'})
   const result  = ref({})
+  const authStore = useAuthStore()
 
-  const onSubmit=() => {
-    const result = login(form)
-    console.log('Clicked on submit')
+  const onSubmit = async () => {
+    const result = await login(form)
+    authStore.signin(form)
+    console.log(result)
   }
 
 </script>

@@ -2,38 +2,28 @@ import { type LoginForm } from '@/components/LoginForm'
 import { type RegisterForm } from '@/components/RegisterForm'
 
 type UserAuth = {
+  username: String,
   token: String,
   expires_at: String,
 }
 
-export const login = (form: LoginForm): { success: Boolean, data: any, error?: string } => {
-  let success
+export const login = async (form: LoginForm): { success: Boolean, data: any, error?: string } => {
   let data
-  let error;
-  console.log(form)
 
-  fetch('http://localhost:3001/v1/sessions', {
+  let result = await fetch('http://localhost:3001/v1/sessions', {
     method: "POST",
     body: JSON.stringify(form),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
   })
-    .then((response) => {
-      response.json().then((d) => {
-        data = d
-        console.log(data)
-      });
-    })
-    .catch((err) => {
-      error = err
-      console.log(err)
-      // { detail: 'User and password don\'t match', data: {} }
-    });
-  if (error != '')
-    return { success: false, data: {}, error }
+
+  data = await result.json()
+
+  if (result.ok)
+    return { success: result.ok, data: data }
   else
-    return { success: true, data }
+    return { success: result.ok, data: data, error: data.error }
 }
 
 export const register = async (form: RegisterForm): Promise<{ success: Boolean, data: any, error?: string }> => {
