@@ -5,11 +5,11 @@ import { type LoginForm } from '@/components/LoginForm'
 type AuthType = { username: string, token: string, exp: string }
 
 export const useAuthStore = defineStore('auth', () => {
-  let user = reactive(<AuthType>{username: '', token: '', exp: ''})
+  const user = reactive(<AuthType>{username: '', token: '', exp: ''})
 
   const signin = async (form:LoginForm) => {
-    user = await login(form)
-    
+    const { success, data, error } = await login(form)
+    Object.assign(user, data);
   }
   return { user, signin }
 })
