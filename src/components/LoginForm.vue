@@ -10,14 +10,12 @@
   const authStore = useAuthStore()
 
   const onSubmit = async () => {
-    // const result = await login(form)
     authStore.signin(form)
   }
 
 </script>
 
 <template>
-  {{  authStore }}
   <h1 class="title is-1">Login</h1>
   <Form @submit="onSubmit">
     <div class="field">

@@ -26,6 +26,16 @@ export const login = async (form: LoginForm): { success: Boolean, data: any, err
     return { success: result.ok, data: data, error: data.error }
 }
 
+export const logout = async () => {
+  let result = await fetch('http://localhost:3001/v1/sessions', {
+    method: "DELETE",
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+  return { success: true }
+}
+
 export const register = async (form: RegisterForm): Promise<{ success: Boolean, data: any, error?: string }> => {
   return new Promise((res) => {
     let success
