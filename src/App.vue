@@ -13,6 +13,7 @@ const authStore = useAuthStore()
       <div class="tabs">
         <ul>
           <li><RouterLink to="/">Home</RouterLink></li>
+          <li v-show="authStore.authorized"><RouterLink to="/upload">Upload</RouterLink></li>
           <li v-show="authStore.authorized"><a @click="authStore.signout">Logout</a></li>
           <li v-show="!authStore.authorized"><RouterLink to="/login">Login</RouterLink></li>
           <li v-show="!authStore.authorized"><RouterLink to="/register">Register</RouterLink></li>

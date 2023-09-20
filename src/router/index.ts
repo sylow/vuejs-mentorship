@@ -2,26 +2,32 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
-
+import ImageUploadView from '../views/ImageUploadView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: {auth: true}
+    meta: {authRequired: true}
+  },
+  {
+    path: '/upload',
+    name: 'upload',
+    component: ImageUploadView,
+    meta: {authRequired: true}
   },
   {
     path: '/login',
     name: 'login',
     component: LoginView,
-    meta: {auth: false}
+    meta: {authRequired: false}
   },
   {
     path: '/register',
     name: 'register',
     component: RegisterView,
-    meta: {auth: false}
+    meta: {authRequired: false}
   }
 ]
 
@@ -35,14 +41,12 @@ import { useAuthStore } from '@/stores/auth'
 router.beforeEach(async (to, from) => {
   const authStore = useAuthStore()
 
-  if (!authStore.auth.token && to.meta.auth){
+  if (!authStore.auth.token && to.meta.authRequired){
     return { name: 'login'}
   }
-  if (!!authStore.auth.token && !to.meta.auth){
-    return { name: '/'}
+  if (!!authStore.auth.token && !to.meta.authRequired){
+    return
   }
-  console.log('to: ', to)
-  console.log('from', from)
 })
 
 export default router
