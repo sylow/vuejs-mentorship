@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { reactive, type PropType, onMounted } from 'vue'
+import { ref, reactive, type PropType, onMounted } from 'vue'
 import { type IRecordForm } from './RecordForm'
 import ImageForm from '@/components/ImageUpload.vue'
 
+const file = ref([])
 const form = reactive<IRecordForm>({
-  date: '', weight: 0, file: []
+  recorded_on: '', weight: 0
 })
 
 const props = defineProps({
@@ -14,12 +15,12 @@ const props = defineProps({
   }
 })
 
-onMounted(() => {
-  if (props.initialValue) {
-    form.date = props.initialValue.date
-    // ...
-  }
-})
+// onMounted(() => {
+//   if (props.initialValue) {
+//     form.date = props.initialValue.date
+//     // ...
+//   }
+// })
 
 const emit = defineEmits<{
   (e: 'submit', data: IRecordForm): void
@@ -37,7 +38,7 @@ const onSubmit = () => {
     <div class="field">
       <label class="label">Record Date:</label>
       <div class="control">
-        <input type="text" name="date" role="date" class="input" v-model="form.date"/>
+        <input type="text" name="recorded_on" role="recorded_on" class="input" v-model="form.recorded_on"/>
       </div>
     </div>
 
@@ -48,7 +49,7 @@ const onSubmit = () => {
       </div>
     </div>
     <div class="field">
-      <ImageForm v-model="form.file"/>
+      <ImageForm v-model="file"/>
     </div>
 
     <div class="field is-grouped">

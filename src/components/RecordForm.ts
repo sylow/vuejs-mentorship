@@ -1,5 +1,4 @@
 export interface IRecordForm {
-  date: string,
+  recorded_on: string,
   weight: number | null,
-  file: File[]
 }

@@ -11,7 +11,7 @@ export const checkToken = async (access_token: string) => {
   return false
 }
 
-export const login = async (form: LoginForm): { success: Boolean, data: any, error?: string } => {
+export const login = async (form: LoginForm): Promise<{ success: Boolean, data: any, error?: string }> => {
   let data
 
   let result = await fetch('http://localhost:3001/v1/sessions', {

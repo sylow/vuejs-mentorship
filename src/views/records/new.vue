@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import RecordForm from '@/components/RecordForm.vue'
 import { type IRecordForm } from '@/components/RecordForm'
-import { submit } from '@/services/record.service'
+import { save } from '@/services/record.service'
+
 const onSubmit = async (form: IRecordForm) => {
-  const result = await submit(form)
+  const result = await save(form)
   console.log(result)
   console.log('Submit:', form)
 }
