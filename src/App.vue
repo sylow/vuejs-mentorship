@@ -33,13 +33,12 @@ onMounted(async () => {
     <header>
       <div class="tabs">
         <ul>
-          <li :class="{'is-active': route.name == 'home'}"><RouterLink :to="{ name: Views.HOME }">Home</RouterLink></li>
-          <li :class="{'is-active': route.name == 'upload'}" v-show="authStore.authorized"><RouterLink to="/upload">Upload</RouterLink></li>
-          <li :class="{'is-active': route.name == 'recordadd'}" v-show="authStore.authorized"><RouterLink :to="{name: Views.RECORD}">Record Add</RouterLink></li>
-          <li :class="{'is-active': route.name == 'recordlist'}" v-show="authStore.authorized"><RouterLink :to="{name: Views.RECORD_LIST}">Record List</RouterLink></li>
+          <li :class="{'is-active': route.name == Views.HOME}"><RouterLink :to="{ name: Views.HOME }">Home</RouterLink></li>
+          <li :class="{'is-active': route.name == Views.RECORD_NEW}" v-show="authStore.authorized"><RouterLink :to="{name: Views.RECORD_NEW}">Record Add</RouterLink></li>
+          <li :class="{'is-active': route.name == Views.RECORD_LIST}" v-show="authStore.authorized"><RouterLink :to="{name: Views.RECORD_LIST}">Record List</RouterLink></li>
           <li v-show="authStore.authorized"><a @click="authStore.signout">Logout</a></li>
-          <li :class="{'is-active': route.name == 'login'}" v-show="!authStore.authorized"><RouterLink to="/login">Login</RouterLink></li>
-          <li :class="{'is-active': route.name == 'register'}" v-show="!authStore.authorized"><RouterLink to="/register">Register</RouterLink></li>
+          <li :class="{'is-active': route.name == Views.LOGIN}" v-show="!authStore.authorized"><RouterLink :to="{name: Views.LOGIN}">Login</RouterLink></li>
+          <li :class="{'is-active': route.name == Views.REGISTER}" v-show="!authStore.authorized"><RouterLink :to="{name: Views.REGISTER}">Register</RouterLink></li>
         </ul>
       </div>
     </header>

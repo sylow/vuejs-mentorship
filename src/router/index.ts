@@ -1,19 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import RegisterView from '../views/RegisterView.vue'
-import LoginView from '../views/LoginView.vue'
-import ImageUploadView from '../views/ImageUploadView.vue'
-import RecordAdd from '../views/RecordAdd.vue'
-import RecordList from '../views/RecordList.vue'
+import HomeView from '@/views/home.vue'
+import RegisterView from '@/views/sessions/register.vue'
+import LoginView from '@/views/sessions/login.vue'
+import RecordAdd from '@/views/records/new.vue'
+import RecordList from '@/views/records/list.vue'
 
 // ToDo - fill the routes with the enum
 export enum Views {
   HOME = 'home',
-  UPLOAD = 'upload',
   LOGIN = 'login',
   REGISTER = 'register',
-  RECORD = 'record_add',
-  RECORD_LIST = 'record_list',
+  RECORD_NEW = 'record-new',
+  RECORD_LIST = 'record-list',
 }
 
 const routes = [
@@ -21,12 +19,6 @@ const routes = [
     path: '/',
     name: Views.HOME,
     component: HomeView,
-    meta: {authRequired: true}
-  },
-  {
-    path: '/upload',
-    name: 'upload',
-    component: ImageUploadView,
     meta: {authRequired: true}
   },
   {
@@ -42,15 +34,15 @@ const routes = [
     meta: {authRequired: false}
   },
   {
-    path: '/record_add',
-    name: 'record_add',
+    path: '/record/new',
+    name: Views.RECORD_NEW,
     component: RecordAdd,
     meta: {authRequired: false}
   },
 
   {
-    path: '/record_list',
-    name: 'record_list',
+    path: '/record/list',
+    name: Views.RECORD_LIST,
     component: RecordList,
     meta: {authRequired: true}
   },
