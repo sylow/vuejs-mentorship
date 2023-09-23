@@ -7,6 +7,10 @@ type UserAuth = {
   expires_at: String,
 }
 
+export const checkToken = async (access_token: string) => {
+  return false
+}
+
 export const login = async (form: LoginForm): { success: Boolean, data: any, error?: string } => {
   let data
 

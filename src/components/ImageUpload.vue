@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type PropType } from 'vue'
 import { useDropZone, useMouse } from '@vueuse/core'
 
 const filesData = ref<{ name: string; size: number; type: string; lastModified: number }[]>([])
@@ -7,6 +7,20 @@ const dropZoneRef = ref<HTMLDivElement>()
 
 function onDrop(files: File[] | null) {
   filesData.value = []
+
+  if (files) {
+    files.forEach((file) => {
+      if (['image/jpeg', 'image/png'].includes(file.type)) {
+
+      } else {
+        console.log('wrong type')
+        // error.value = 'File is not supported'
+      }
+    })
+
+    files = files.filter(file => ['image/jpeg'].includes(file.type))
+  }
+
   if (files) {
     console.log(files)
     filesData.value = files.map(file => ({
@@ -16,15 +30,29 @@ function onDrop(files: File[] | null) {
       lastModified: file.lastModified,
     }))
   }
+  if (files !== null) {
+    emit('update:modelValue', files)
+  }
   console.log(filesData.value)
 }
+
+const props = defineProps({
+  modelValue: {
+    type: Object as PropType<File[]>,
+    required: true
+  }
+})
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: File[]): void
+}>()
 
 const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
 </script>
 
 <template>
-  <div class='dropzone' ref="dropZoneRef">
-       <div> isOverDropZone: <BooleanDisplay :value="isOverDropZone" /></div>
+  <div class='dropzone p-3' ref="dropZoneRef">
+       <div> isOverDropZone: {{  isOverDropZone }}</div>
         <div class="flex flex-wrap justify-center items-center">
           <div v-for="(file, index) in filesData" :key="index" class="w-200px bg-black-200/10 ma-2 pa-6">
             <p>Name: {{ file.name }}</p>
@@ -39,8 +67,9 @@ const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
 
 <style scoped>
 .dropzone{
-  background-color: #bbb;
+  background-color: #efefef;
   height: 200px;
-  width: 200px;
+  margin: 0 auto;
+  border-style: dotted;
 }
 </style>

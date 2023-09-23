@@ -10,7 +10,7 @@ const AuthInit = {username:'', token: '', exp: ''}
 export const useAuthStore = defineStore('auth', () => {
   const auth = reactive(<AuthType>{username:'', token: '', exp: ''})
   const router = useRouter()
-  
+
   const signin = async (form:LoginForm) => {
     const { success, data, error } = await login(form)
     Object.assign(auth, data);

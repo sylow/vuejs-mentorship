@@ -3,11 +3,23 @@ import HomeView from '../views/HomeView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import ImageUploadView from '../views/ImageUploadView.vue'
+import RecordAdd from '../views/RecordAdd.vue'
+import RecordList from '../views/RecordList.vue'
+
+// ToDo - fill the routes with the enum
+export enum Views {
+  HOME = 'home',
+  UPLOAD = 'upload',
+  LOGIN = 'login',
+  REGISTER = 'register',
+  RECORD = 'record_add',
+  RECORD_LIST = 'record_list',
+}
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: Views.HOME,
     component: HomeView,
     meta: {authRequired: true}
   },
@@ -28,7 +40,20 @@ const routes = [
     name: 'register',
     component: RegisterView,
     meta: {authRequired: false}
-  }
+  },
+  {
+    path: '/record_add',
+    name: 'record_add',
+    component: RecordAdd,
+    meta: {authRequired: false}
+  },
+
+  {
+    path: '/record_list',
+    name: 'record_list',
+    component: RecordList,
+    meta: {authRequired: true}
+  },
 ]
 
 const router = createRouter({
