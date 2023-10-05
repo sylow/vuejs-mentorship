@@ -3,9 +3,8 @@ import { ref, reactive, type PropType, onMounted } from 'vue'
 import { type IRecordForm } from './RecordForm'
 import ImageForm from '@/components/ImageUpload.vue'
 
-const file = ref([])
 const form = reactive<IRecordForm>({
-  recorded_on: '', weight: 0
+  recorded_on: '', weight: 0, image: null
 })
 
 const props = defineProps({
@@ -27,9 +26,10 @@ const emit = defineEmits<{
 }>()
 
 const onSubmit = () => {
+  console.log(form)
   emit('submit', form)
-  console.log('submit')
 }
+
 </script>
 
 <template>
@@ -49,7 +49,7 @@ const onSubmit = () => {
       </div>
     </div>
     <div class="field">
-      <ImageForm v-model="file"/>
+      <ImageForm v-model="form.image"/>
     </div>
 
     <div class="field is-grouped">

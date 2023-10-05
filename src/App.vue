@@ -43,7 +43,7 @@ onMounted(async () => {
       </div>
     </header>
   <br/>
-
+  <notifications position='bottom right' />
   <RouterView v-if="pageIsReady" />
   <div v-else>Checking authentication...</div>
 

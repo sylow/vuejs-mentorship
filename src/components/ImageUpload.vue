@@ -7,7 +7,6 @@ const dropZoneRef = ref<HTMLDivElement>()
 
 function onDrop(files: File[] | null) {
   filesData.value = []
-
   if (files) {
     files.forEach((file) => {
       if (['image/jpeg', 'image/png'].includes(file.type)) {
@@ -18,22 +17,21 @@ function onDrop(files: File[] | null) {
       }
     })
 
-    files = files.filter(file => ['image/jpeg'].includes(file.type))
+    // files = files.filter(file => ['image/jpeg'].includes(file.type))
   }
 
   if (files) {
-    console.log(files)
     filesData.value = files.map(file => ({
       name: file.name,
+      filename: file.name,
       size: file.size,
       type: file.type,
       lastModified: file.lastModified,
     }))
   }
   if (files !== null) {
-    emit('update:modelValue', files)
+    emit('update:modelValue', files[0])
   }
-  console.log(filesData.value)
 }
 
 const props = defineProps({
@@ -44,7 +42,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: File[]): void
+  (e: 'update:modelValue', value: File): void
 }>()
 
 const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
